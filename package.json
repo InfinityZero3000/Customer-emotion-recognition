@@ -1,0 +1,44 @@
+{
+  "name": "customer-emotion-recognition",
+  "version": "1.0.0",
+  "description": "Customer emotion recognition system for e-commerce websites",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "start": "turbo run start",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "frontend:dev": "pnpm --filter=frontend dev",
+    "frontend:build": "pnpm --filter=frontend build",
+    "frontend:start": "pnpm --filter=frontend start",
+    "api:dev": "pnpm --filter=api-service dev",
+    "api:build": "pnpm --filter=api-service build",
+    "api:start": "pnpm --filter=api-service start",
+    "ai:dev": "pnpm --filter=ai-service dev",
+    "ai:start": "pnpm --filter=ai-service start",
+    "prepare-deploy": "node -e \"console.log('Preparing for deployment...')\" && pnpm build",
+    "deploy": "node -e \"console.log('Running deployment script...')\" && powershell -ExecutionPolicy Bypass -File ./deploy.ps1"
+  },
+  "keywords": [
+    "emotion-recognition",
+    "e-commerce",
+    "ai",
+    "machine-learning"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "turbo": "^2.5.3",
+    "prettier": "^3.0.0"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
