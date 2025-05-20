@@ -44,8 +44,9 @@ pnpm install
 Write-Host "Building shared packages..." -ForegroundColor Cyan
 pnpm --filter="shared-types" build
 pnpm --filter="ui" build
-pnpm --filter="emotion-recognition" build
-pnpm --filter="ai-core" build
+# Skip packages that don't exist or are not fully set up
+# pnpm --filter="emotion-recognition" build
+# pnpm --filter="ai-core" build
 
 # Build backend services
 Write-Host "Building backend services..." -ForegroundColor Cyan
@@ -58,10 +59,15 @@ pnpm --filter="frontend" build
 
 # Set up deployment environment variables
 if ($env:NODE_ENV -eq "production") {
-  # Uncomment and update these variables for production deployment
-  # $env:FRONTEND_URL = "https://your-production-domain.com"
-  # $env:BACKEND_API_URL = "https://api.your-production-domain.com"
-  # $env:AI_SERVICE_URL = "https://ai-service.your-production-domain.com"
+  # Update these variables with your actual host domains or IP addresses
+  $env:FRONTEND_URL = "https://your-hostname.com" # Replace with your actual domain or IP address
+  $env:BACKEND_API_URL = "https://your-hostname.com/api" # Replace with your actual API endpoint
+  $env:AI_SERVICE_URL = "https://your-hostname.com/ai-service" # Replace with your actual AI service endpoint
+  
+  # If deploying to the same server with different ports, you might use:
+  # $env:FRONTEND_PORT = "3000"
+  # $env:BACKEND_API_PORT = "3001"
+  # $env:AI_SERVICE_PORT = "3002"
 }
 
 Write-Host "Deployment build completed!" -ForegroundColor Green

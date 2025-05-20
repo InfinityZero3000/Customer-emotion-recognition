@@ -19,6 +19,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
+    "@swc/core": "^1.11.24",
     "@types/node": "^20.17.48",
     "@types/react": "^19.1.4",
     "tsup": "^8.5.0",
