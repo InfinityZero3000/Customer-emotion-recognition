@@ -8,8 +8,6 @@
 [![typescript](https://img.shields.io/badge/typescript-37.7%25-blue?style=flat-square)](https://github.com/JenniferZero/Customer-emotion-recognition)
 [![languages](https://img.shields.io/badge/languages-4-blue?style=flat-square)](https://github.com/JenniferZero/Customer-emotion-recognition)
 
----
-
 *Built with the tools and technologies:*
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 20px 0;">
@@ -42,8 +40,6 @@
 
 </div>
 
----
-
 ## Table of Contents
 
 • [Overview](#overview)
@@ -57,8 +53,6 @@
   • [Usage](#usage)
 
 • [Testing](#testing)
-
----
 
 ## Overview
 
@@ -75,8 +69,6 @@ Customer-emotion-recognition is an all-in-one developer toolset designed to faci
 • ⚙️ 🔧 **Dependency & Workflow Management**: Use monorepo tools like pnpm and Turbo for reliable builds, caching, and dependency control.
 
 • 🌐 💻 **API Endpoints & Integration**: Seamlessly connect frontend, backend, and AI services for a scalable, real-time customer engagement platform.
-
----
 
 ## Getting Started
 
@@ -161,8 +153,6 @@ Before running this project, ensure you have the following installed:
    pnpm start
    ```
 
----
-
 ## Testing
 
 Run comprehensive tests across all services:
@@ -177,8 +167,6 @@ pnpm --filter="frontend" test
 # Run API service tests
 pnpm --filter="api-service" test
 ```
-
----
 
 ## 🏗️ Architecture
 
@@ -202,14 +190,10 @@ The project is structured as a monorepo using Turborepo and pnpm workspaces, con
 - Emotion classification and confidence scoring
 - API for emotion data processing
 
----
-
 ## 📝 API Documentation
 
 - **API Service Swagger**: http://localhost:3001/api
 - **AI Service API docs**: http://localhost:5000/docs
-
----
 
 ## 🧩 Project Structure
 
@@ -227,8 +211,6 @@ customer-emotion-recognition/
 └── README.md                  # Project documentation
 ```
 
----
-
 ## 📚 Tech Stack
 
 - **Frontend**: Next.js 15 with App Router, SSR/SSG/ISR capabilities, TailwindCSS v4
@@ -237,8 +219,6 @@ customer-emotion-recognition/
 - **Dashboard**: Medusa.js
 - **Database**: PostgreSQL with vector DB capabilities
 - **Monorepo Management**: Turborepo, pnpm
-
----
 
 ## 📊 Project Status
 
@@ -260,8 +240,6 @@ customer-emotion-recognition/
 5. Add product details pages and browsing
 6. Deploy services to cloud providers
 
----
-
 ## 🔮 Future Roadmap
 
 1. Enhanced emotion detection using more sophisticated models
@@ -271,8 +249,6 @@ customer-emotion-recognition/
 5. Multi-language support
 6. Mobile application
 
----
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -280,8 +256,6 @@ customer-emotion-recognition/
 3. Commit changes: `git commit -m 'Add feature'`
 4. Push to the branch: `git push origin feature-name`
 5. Submit a pull request
-
----
 
 ## 📄 License
 
