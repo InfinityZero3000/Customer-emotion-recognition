@@ -12,29 +12,33 @@
 
 *Built with the tools and technologies:*
 
-![JSON](https://img.shields.io/badge/JSON-black?style=flat-square&logo=json)
-![Markdown](https://img.shields.io/badge/Markdown-black?style=flat-square&logo=markdown)
-![npm](https://img.shields.io/badge/npm-red?style=flat-square&logo=npm)
-![Autoprefixer](https://img.shields.io/badge/Autoprefixer-orange?style=flat-square&logo=autoprefixer)
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-red?style=flat-square&logo=sqlalchemy)
-![PostCSS](https://img.shields.io/badge/PostCSS-orange?style=flat-square&logo=postcss)
-![Prettier](https://img.shields.io/badge/Prettier-orange?style=flat-square&logo=prettier)
-![GNU Bash](https://img.shields.io/badge/GNU%20Bash-green?style=flat-square&logo=gnu-bash)
-![FastAPI](https://img.shields.io/badge/FastAPI-teal?style=flat-square&logo=fastapi)
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 20px 0;">
 
-![LangChain](https://img.shields.io/badge/LangChain-black?style=flat-square&logo=chainlink)
-![Turbo](https://img.shields.io/badge/Turbo-teal?style=flat-square&logo=turbo)
+![JSON](https://img.shields.io/badge/JSON-black?style=for-the-badge&logo=json&logoColor=white)
+![Markdown](https://img.shields.io/badge/Markdown-black?style=for-the-badge&logo=markdown&logoColor=white)
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+![Autoprefixer](https://img.shields.io/badge/Autoprefixer-DD3735?style=for-the-badge&logo=autoprefixer&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)
+![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white)
+![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)
+![GNU Bash](https://img.shields.io/badge/GNU%20Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 
-![React](https://img.shields.io/badge/React-blue?style=flat-square&logo=react)
-![NumPy](https://img.shields.io/badge/NumPy-blue?style=flat-square&logo=numpy)
-![Python](https://img.shields.io/badge/Python-blue?style=flat-square&logo=python)
-![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat-square&logo=typescript)
-![tsnode](https://img.shields.io/badge/tsnode-blue?style=flat-square&logo=ts-node)
-![ESLint](https://img.shields.io/badge/ESLint-purple?style=flat-square&logo=eslint)
-![pandas](https://img.shields.io/badge/pandas-purple?style=flat-square&logo=pandas)
-![Pydantic](https://img.shields.io/badge/Pydantic-red?style=flat-square&logo=pydantic)
-![Jest](https://img.shields.io/badge/Jest-red?style=flat-square&logo=jest)
-![YAML](https://img.shields.io/badge/YAML-red?style=flat-square&logo=yaml)
+![LangChain](https://img.shields.io/badge/LangChain-000000?style=for-the-badge&logo=chainlink&logoColor=white)
+![Turbo](https://img.shields.io/badge/Turbo-5CD8E5?style=for-the-badge&logo=turbo&logoColor=white)
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=pydantic&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=jest&logoColor=white)
+![YAML](https://img.shields.io/badge/YAML-CB171E?style=for-the-badge&logo=yaml&logoColor=white)
+
+</div>
 
 </div>
 
