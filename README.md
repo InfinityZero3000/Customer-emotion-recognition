@@ -4,9 +4,9 @@
 
 *Unlock Customer Insights, Drive Personalized Experiences*
 
-[![last commit](https://img.shields.io/github/last-commit/nguyenhuuthang/customer-emotion-recognition?color=blue&label=last%20commit&style=flat-square)](https://github.com/nguyenhuuthang/customer-emotion-recognition)
-[![typescript](https://img.shields.io/badge/typescript-37.7%25-blue?style=flat-square)](https://github.com/nguyenhuuthang/customer-emotion-recognition)
-[![languages](https://img.shields.io/badge/languages-4-blue?style=flat-square)](https://github.com/nguyenhuuthang/customer-emotion-recognition)
+[![last commit](https://img.shields.io/github/last-commit/JenniferZero/Customer-emotion-recognition?color=blue&label=last%20commit&style=flat-square)](https://github.com/JenniferZero/Customer-emotion-recognition)
+[![typescript](https://img.shields.io/badge/typescript-37.7%25-blue?style=flat-square)](https://github.com/JenniferZero/Customer-emotion-recognition)
+[![languages](https://img.shields.io/badge/languages-4-blue?style=flat-square)](https://github.com/JenniferZero/Customer-emotion-recognition)
 
 ---
 
@@ -89,7 +89,7 @@ Before running this project, ensure you have the following installed:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/nguyenhuuthang/customer-emotion-recognition.git
+   git clone https://github.com/JenniferZero/Customer-emotion-recognition.git
    cd customer-emotion-recognition
    ```
 
