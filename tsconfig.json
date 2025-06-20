@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@repo/*": ["./packages/*"]
+    }
+  },
+  "include": [],
+  "exclude": ["node_modules"],
+  "references": [
+    {
+      "path": "./packages/shared-types"
+    },
+    {
+      "path": "./packages/ui"
+    },
+    {
+      "path": "./packages/event-bus"
+    },
+    {
+      "path": "./packages/streaming"
+    },
+    {
+      "path": "./packages/vector-db"
+    },
+    {
+      "path": "./packages/ai-agent"
+    },
+    {
+      "path": "./apps/frontend"
+    },
+    {
+      "path": "./apps/api-service/nest-service"
+    }
+  ]
+}

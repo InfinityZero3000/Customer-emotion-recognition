@@ -1,5 +1,5 @@
 {
-  "name": "shared-types",
+  "name": "@repo/shared-types",
   "version": "1.0.0",
   "description": "Shared TypeScript type definitions for the customer emotion recognition system",
   "main": "./dist/index.js",

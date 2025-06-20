@@ -3,15 +3,10 @@
   "version": "1.0.0",
   "description": "Customer emotion recognition system for e-commerce websites",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "start": "turbo run start",
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "frontend:dev": "pnpm --filter=frontend dev",
@@ -23,7 +18,10 @@
     "ai:dev": "pnpm --filter=ai-service dev",
     "ai:start": "pnpm --filter=ai-service start",
     "prepare-deploy": "node -e \"console.log('Preparing for deployment...')\" && pnpm build",
-    "deploy": "node -e \"console.log('Running deployment script...')\" && powershell -ExecutionPolicy Bypass -File ./deploy.ps1"
+    "deploy": "node -e \"console.log('Running deployment script...')\" && powershell -ExecutionPolicy Bypass -File ./deploy.ps1",
+    "setup": "bash apps/ai-service/fastapi-service/setup.sh",
+    "train": "bash apps/ai-service/fastapi-service/train-all.sh",
+    "start": "bash apps/ai-service/fastapi-service/run.sh"
   },
   "keywords": [
     "emotion-recognition",

@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties for Theme */
+:root {
+  /* Light theme colors */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 84% 4.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
+  
+  /* Custom emotion colors */
+  --emotion-happy: 142.1 76.2% 36.3%;
+  --emotion-sad: 221.2 83.2% 53.3%;
+  --emotion-angry: 0 84.2% 60.2%;
+  --emotion-surprise: 32.1 94.6% 43.7%;
+  --emotion-fear: 262.1 83.3% 57.8%;
+  --emotion-disgust: 24.6 95% 53.1%;
+  --emotion-neutral: 215 13.8% 34.1%;
+  --emotion-unknown: 214.3 31.8% 70.6%;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 84% 4.9%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 94.1%;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Component layer utilities */
+@layer components {
+  /* Emotion indicator styles */
+  .emotion-indicator {
+    @apply inline-flex items-center justify-center rounded-full text-xs font-medium transition-all duration-300;
+    @apply px-2.5 py-1 min-w-[3rem];
+  }
+  
+  .emotion-happy { @apply bg-emerald-100 text-emerald-800 border border-emerald-200; }
+  .emotion-sad { @apply bg-blue-100 text-blue-800 border border-blue-200; }
+  .emotion-angry { @apply bg-red-100 text-red-800 border border-red-200; }
+  .emotion-surprise { @apply bg-amber-100 text-amber-800 border border-amber-200; }
+  .emotion-fear { @apply bg-violet-100 text-violet-800 border border-violet-200; }
+  .emotion-disgust { @apply bg-orange-100 text-orange-800 border border-orange-200; }
+  .emotion-neutral { @apply bg-gray-100 text-gray-800 border border-gray-200; }
+  .emotion-unknown { @apply bg-gray-50 text-gray-600 border border-gray-100; }
+  
+  /* Card styles */
+  .card-gradient {
+    @apply bg-gradient-to-br from-white via-blue-50/30 to-blue-100/50;
+    @apply backdrop-blur-sm border border-blue-100/50;
+  }
+  
+  /* Button styles */
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white;
+    @apply shadow-lg hover:shadow-xl transition-all duration-200;
+    @apply border border-primary-600 hover:border-primary-700;
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-gray-900;
+    @apply shadow-md hover:shadow-lg transition-all duration-200;
+    @apply border border-gray-200 hover:border-gray-300;
+  }
+  
+  /* Animation utilities */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+}
+
+/* Utility layer styles */
+@layer utilities {
+  /* Text gradient utilities */
+  .text-gradient-blue {
+    @apply bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-emotion {
+    background: linear-gradient(135deg, var(--emotion-color), var(--emotion-color-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    @apply backdrop-blur-md bg-white/30 border border-white/20;
+    backdrop-filter: blur(16px);
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-md bg-black/30 border border-white/10;
+    backdrop-filter: blur(16px);
+  }
+}
+
+/* Additional keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.3);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --border: 0 0% 0%;
+  }
+  
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

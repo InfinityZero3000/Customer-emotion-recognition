@@ -6,9 +6,9 @@ import cv2
 from datetime import datetime
 from typing import Dict, List, Any, Tuple, Optional
 from fastapi import UploadFile
-import torch
 from PIL import Image
 from dotenv import load_dotenv
+from fer import FER
 
 # Load environment variables
 load_dotenv()
@@ -18,28 +18,24 @@ logger = logging.getLogger("emotion-detector")
 
 class EmotionDetector:
     """
-    Handles emotion detection from images using YOLO-based models.
+    Handles emotion detection from images using FER (Facial Emotion Recognition).
     """
     def __init__(self):
-        self.model_loaded = False
-        self.model = None
         self.emotion_classes = ['angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral']
+        self.detector = None
         self.load_model()
     
     def load_model(self):
         """
-        Load the YOLO model for face detection and emotion recognition.
-        In a real implementation, would load specific emotion detection models.
+        Load the FER model for emotion recognition.
         """
         try:
-            # For now, we're using a simple YOLOv5 model for demonstration
-            # In a real implementation, would use a specialized emotion detection model
-            self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
-            self.model.classes = [0]  # Only detect people (class 0 in COCO)
+            # Initialize FER detector
+            self.detector = FER(mtcnn=True)  # Use MTCNN for better face detection
             self.model_loaded = True
-            logger.info("Emotion detection model loaded successfully")
+            logger.info("FER emotion detection model loaded successfully")
         except Exception as e:
-            logger.error(f"Failed to load emotion detection model: {str(e)}")
+            logger.error(f"Failed to load FER emotion detection model: {str(e)}")
             # Fall back to a mock detection mode
             self.model_loaded = False
     
@@ -50,7 +46,7 @@ class EmotionDetector:
         try:
             # Read image file
             contents = await image_file.read()
-            image = Image.open(io.BytesIO(contents))
+            image = Image.open(io.BytesIO(contents)).convert("RGB")
             
             # If model is loaded, use it for detection
             if self.model_loaded:
@@ -58,7 +54,10 @@ class EmotionDetector:
                 if not faces:
                     # Fall back to mock data if no faces detected
                     return self._generate_mock_emotion_data()
-                return emotions
+                return {
+                    "num_faces": len(faces),
+                    "emotions": emotions
+                }
             else:
                 # Use mock data if model not loaded
                 return self._generate_mock_emotion_data()
@@ -85,12 +84,18 @@ class EmotionDetector:
             for *box, conf, cls in pred:
                 if int(cls) == 0 and conf > 0.5:  # Person class with confidence > 0.5
                     x1, y1, x2, y2 = [int(c) for c in box]
-                    faces.append(img_cv2[y1:y2, x1:x2])
+                    face = img_cv2[y1:y2, x1:x2]
+                    faces.append(face)
         
         # If faces detected, process them for emotions (in a real impl, would use an emotion model)
         if faces:
-            # For now, generate mock emotion data that looks realistic
-            emotions = self._generate_mock_emotion_data(True)
+            emotions = []
+            for face in faces:
+                try:
+                    result = DeepFace.analyze(face, actions=['emotion'], enforce_detection=False)
+                    emotions.append(result['emotion'])
+                except Exception as e:
+                    emotions.append({"error": str(e)})
         else:
             emotions = None
             

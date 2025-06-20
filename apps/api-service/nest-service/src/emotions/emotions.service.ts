@@ -1,61 +1,74 @@
 import { Injectable } from '@nestjs/common';
-import { EmotionData, EmotionHistoryEntry } from 'shared-types';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, Between } from 'typeorm';
+import { EmotionData } from 'shared-types';
+import { EmotionHistoryEntry, User } from '../entities';
 
 @Injectable()
 export class EmotionsService {
-  // In-memory storage for demo purposes
-  // In a real app, this would use a database
-  private emotionHistory: Record<string, EmotionHistoryEntry[]> = {};
+  constructor(
+    @InjectRepository(EmotionHistoryEntry)
+    private emotionHistoryRepository: Repository<EmotionHistoryEntry>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
+
+  // Ensure user exists, create if not
+  private async ensureUserExists(userId: string): Promise<User> {
+    let user = await this.userRepository.findOne({ where: { id: userId } });
+    
+    if (!user) {
+      user = this.userRepository.create({
+        id: userId,
+        preferences: {
+          emotionTrackingEnabled: true,
+          showPersonalizedRecommendations: true,
+          theme: 'system',
+        },
+      });
+      await this.userRepository.save(user);
+    }
+
+    return user;
+  }
 
   // Record a new emotion detection for a user
-  async recordEmotion(userId: string, emotionData: EmotionData, pageUrl?: string, contextItemId?: string): Promise<EmotionHistoryEntry> {
+  async recordEmotion(
+    userId: string, 
+    emotionData: EmotionData, 
+    pageUrl?: string, 
+    contextItemId?: string
+  ): Promise<EmotionHistoryEntry> {
+    // Ensure user exists
+    await this.ensureUserExists(userId);
+
     // Create a history entry
-    const historyEntry: EmotionHistoryEntry = {
+    const historyEntry = this.emotionHistoryRepository.create({
+      userId,
       emotion: emotionData.dominantEmotion,
       confidence: emotionData.confidence,
-      timestamp: emotionData.timestamp || new Date().toISOString(),
+      timestamp: new Date(emotionData.timestamp || new Date().toISOString()),
       pageUrl,
       contextItemId,
-    };
+      allEmotions: emotionData.emotions,
+      source: 'nestjs_api',
+    });
 
-    // Initialize the user's history array if it doesn't exist
-    if (!this.emotionHistory[userId]) {
-      this.emotionHistory[userId] = [];
-    }
-
-    // Add the entry to the user's history
-    this.emotionHistory[userId].unshift(historyEntry);
-
-    // For demo purposes, cap the history at 50 entries per user
-    if (this.emotionHistory[userId].length > 50) {
-      this.emotionHistory[userId] = this.emotionHistory[userId].slice(0, 50);
-    }
-
-    return historyEntry;
+    // Save to database
+    return await this.emotionHistoryRepository.save(historyEntry);
   }
 
   // Get emotion history for a user
   async getEmotionHistory(userId: string, limit: number = 10): Promise<EmotionHistoryEntry[]> {
-    // Return empty array if user has no history
-    if (!this.emotionHistory[userId]) {
-      return [];
-    }
-
-    // Return the most recent entries up to the specified limit
-    return this.emotionHistory[userId].slice(0, limit);
+    return await this.emotionHistoryRepository.find({
+      where: { userId },
+      order: { timestamp: 'DESC' },
+      take: limit,
+    });
   }
 
   // Get emotion statistics for a user
   async getEmotionStats(userId: string, timeframe: 'daily' | 'weekly' | 'monthly' = 'daily') {
-    // Get the user's history
-    if (!this.emotionHistory[userId]) {
-      return {
-        emotionCounts: {},
-        dominantEmotion: null,
-        timeframe,
-      };
-    }
-
     // Get the cutoff date based on the timeframe
     const now = new Date();
     let cutoffDate: Date;
@@ -73,10 +86,14 @@ export class EmotionsService {
         break;
     }
 
-    // Filter the history entries by timeframe
-    const filteredHistory = this.emotionHistory[userId].filter(
-      entry => new Date(entry.timestamp) >= cutoffDate
-    );
+    // Get filtered history from database
+    const filteredHistory = await this.emotionHistoryRepository.find({
+      where: {
+        userId,
+        timestamp: Between(cutoffDate, now),
+      },
+      order: { timestamp: 'DESC' },
+    });
 
     // Count occurrences of each emotion
     const emotionCounts: Record<string, number> = {};
