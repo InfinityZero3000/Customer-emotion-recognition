@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ProductsService } from './products/products.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -32,11 +33,22 @@ async function bootstrap() {
     
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-    // Start the server
+
+  // Seed initial data
+  try {
+    const productsService = app.get(ProductsService);
+    await productsService.seedProducts();
+    console.log('✅ Initial product data seeded successfully');
+  } catch (error) {
+    console.error('❌ Error seeding initial data:', error.message);
+  }
+
+  // Start the server
   const port = process.env.API_PORT || 3001;
   const host = process.env.API_HOST || 'localhost';
   await app.listen(port, host);
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  console.log(`🚀 Application is running on: ${await app.getUrl()}`);
+  console.log(`📚 API Documentation available at: ${await app.getUrl()}/api`);
 }
 
 bootstrap();

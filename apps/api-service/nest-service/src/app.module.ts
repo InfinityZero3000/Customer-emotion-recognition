@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecommendationsModule } from './recommendations/recommendations.module';
 import { EmotionsModule } from './emotions/emotions.module';
 import { ProductsModule } from './products/products.module';
+import { AuthModule } from './auth/auth.module';
 import databaseConfig from './config/database.config';
 import { User, EmotionHistoryEntry, Product } from './entities';
 
@@ -27,6 +28,7 @@ import { User, EmotionHistoryEntry, Product } from './entities';
         logging: process.env.NODE_ENV === 'development',
       }),
     }),
+    AuthModule,
     RecommendationsModule,
     EmotionsModule,
     ProductsModule,

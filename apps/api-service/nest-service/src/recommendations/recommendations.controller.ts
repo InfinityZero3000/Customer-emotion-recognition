@@ -23,6 +23,21 @@ export class RecommendationsController {
     );
   }
 
+  @Post('products')
+  @ApiOperation({ summary: 'Get product recommendations based on emotion' })
+  @ApiResponse({ status: 200, description: 'Returns recommended products based on emotion' })
+  async getProductRecommendations(
+    @Body() request: RecommendationRequest,
+    @Query('limit') limit?: string
+  ) {
+    const limitNum = limit ? parseInt(limit, 10) : 10;
+    return this.recommendationsService.getProductRecommendations(
+      request.userId,
+      request.currentEmotion,
+      limitNum
+    );
+  }
+
   @Get('categories')
   @ApiOperation({ summary: 'Get all product categories' })
   @ApiResponse({ status: 200, description: 'Returns all available product categories' })
@@ -33,30 +48,39 @@ export class RecommendationsController {
   }
 
   @Get('user/:userId')
-  @ApiOperation({ summary: 'Get recommendations for a specific user' })
+  @ApiOperation({ summary: 'Get recommendations for a specific user based on history' })
   @ApiParam({ name: 'userId', description: 'User ID' })
+  @ApiQuery({ name: 'limit', required: false, description: 'Number of recommendations' })
   @ApiResponse({ status: 200, description: 'Returns user-specific recommendations' })
-  async getUserRecommendations(@Param('userId') userId: string) {
-    // In a real implementation, this would get the user's previous emotion data
-    // and browsing history to create personalized recommendations
-    
-    // For now, we'll use a neutral emotion as a fallback
-    const neutralEmotion: EmotionData = {
-      emotions: {
-        happy: 0.1,
-        sad: 0.1,
-        angry: 0.1,
-        disgust: 0.1,
-        fear: 0.1,
-        surprise: 0.1,
-        neutral: 0.4,
-        unknown: 0
-      },
-      dominantEmotion: 'neutral',
-      confidence: 0.4,
-      timestamp: new Date().toISOString()
+  async getUserRecommendations(
+    @Param('userId') userId: string,
+    @Query('limit') limit?: string
+  ) {
+    const limitNum = limit ? parseInt(limit, 10) : 10;
+    return this.recommendationsService.getPersonalizedRecommendations(userId, limitNum);
+  }
+
+  @Get('user/:userId/insights')
+  @ApiOperation({ summary: 'Get emotion-based shopping insights for a user' })
+  @ApiParam({ name: 'userId', description: 'User ID' })
+  @ApiResponse({ status: 200, description: 'Returns user emotion insights and preferences' })
+  async getUserInsights(@Param('userId') userId: string) {
+    return this.recommendationsService.getEmotionInsights(userId);
+  }
+
+  @Get('trending/:emotion')
+  @ApiOperation({ summary: 'Get trending products for a specific emotion' })
+  @ApiParam({ name: 'emotion', description: 'Emotion name' })
+  @ApiQuery({ name: 'limit', required: false, description: 'Number of products to return' })
+  @ApiResponse({ status: 200, description: 'Returns trending products for the emotion' })
+  async getTrendingByEmotion(
+    @Param('emotion') emotion: string,
+    @Query('limit') limit?: string
+  ) {
+    const limitNum = limit ? parseInt(limit, 10) : 5;
+    return {
+      emotion,
+      products: await this.recommendationsService.getTrendingRecommendations(emotion, limitNum),
     };
-    
-    return this.recommendationsService.getRecommendedCategories(userId, neutralEmotion);
   }
 }
