@@ -32,6 +32,15 @@ env/
 ENV/
 .env
 
+# Model files
+*.h5
+*.pth
+*.pkl
+*.joblib
+*.model
+models/
+ml_models/
+
 # Build
 .next/
 out/
